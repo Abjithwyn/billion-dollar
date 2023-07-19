@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -15,13 +18,19 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.deepPurple,
         title: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Billion Book'.toUpperCase(),
-            style: const TextStyle(
-                color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),
+          child: GestureDetector(
+            onTap: () {},
+            child: Text(
+              'Billion Book'.toUpperCase(),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
+      body: Container(),
     );
   }
 }
