@@ -83,16 +83,16 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff443E71),
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       // appBar: AppBar(
-      //   centerTitle: false,
-      //   systemOverlayStyle: const SystemUiOverlayStyle(
-      //     statusBarColor: Colors.transparent,
-      //     statusBarIconBrightness: Brightness.light,
-      //     statusBarBrightness: Brightness.light,
-      //   ),
+      //   centerTitle: true,
+      //   // systemOverlayStyle: const SystemUiOverlayStyle(
+      //   //   statusBarColor: Colors.transparent,
+      //   //   statusBarIconBrightness: Brightness.light,
+      //   //   statusBarBrightness: Brightness.light,
+      //   // ),
       //   title: const Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     mainAxisAlignment: MainAxisAlignment.center,
       //     children: [
       //       Text(
       //         'Calendar',
@@ -107,11 +107,11 @@ class _CalendarState extends State<Calendar> {
       //   backgroundColor: Colors.transparent,
       //   automaticallyImplyLeading: true,
       //   elevation: 0,
-      //   leading: IconButton(
-      //     color: const Color.fromARGB(255, 255, 255, 255),
-      //     icon: const Icon(Icons.arrow_back),
-      //     onPressed: () => Navigator.of(context).pop(),
-      //   ),
+      //   // leading: IconButton(
+      //   //   color: const Color.fromARGB(255, 255, 255, 255),
+      //   //   icon: const Icon(Icons.arrow_back),
+      //   //   onPressed: () => Navigator.of(context).pop(),
+      //   // ),
       // ),
       body: SafeArea(
         child: Column(
@@ -192,8 +192,10 @@ class _CalendarState extends State<Calendar> {
                                       gradient: dynamic_index == index
                                           ? const LinearGradient(
                                               colors: [
-                                                Colors.blue,
-                                                Colors.green
+                                                Color.fromARGB(
+                                                    255, 255, 124, 209),
+                                                Color.fromARGB(
+                                                    255, 135, 255, 139)
                                               ],
                                               begin: Alignment.topLeft,
                                               end: Alignment.bottomRight,
@@ -261,27 +263,27 @@ class _CalendarState extends State<Calendar> {
                     // log('----------------' + start.hour.toString());
                     return Padding(
                       padding:
-                          const EdgeInsets.only(top: 18.0, left: 18, right: 18),
+                          const EdgeInsets.only(top: 0, left: 18, right: 18),
                       child: Row(
                         children: [
                           Column(
                             children: [
-                              Row(
-                                children: [
-                                  // CustomWidgets()
-                                  //     .boldTextbox(time, 15, Colors.black54),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: const Divider(
-                                      color: Colors.black38,
-                                      height: 1,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Gap(18),
+                              // Row(
+                              //   children: [
+                              //     // CustomWidgets()
+                              //     //     .boldTextbox(time, 15, Colors.black54),
+                              //     SizedBox(
+                              //       width:
+                              //           MediaQuery.of(context).size.width * 0.7,
+                              //       child: const Divider(
+                              //         color: Colors.black38,
+                              //         height: 1,
+                              //         thickness: 1,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              const Gap(8),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 decoration: BoxDecoration(
@@ -292,48 +294,68 @@ class _CalendarState extends State<Calendar> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      CustomWidgets().boldTextbox(
-                                          snapshot.data()['note'],
-                                          15,
-                                          user['type'] == 'debit'
-                                              ? Color.fromARGB(
-                                                  255, 255, 255, 255)
-                                              : Color.fromARGB(255, 0, 0, 0)),
-                                      const Gap(2),
-                                      Row(
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.03,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.04,
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/images/time.png"),
-                                                fit: BoxFit.contain,
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.03,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.04,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: user['type'] ==
+                                                            'debit'
+                                                        ? const AssetImage(
+                                                            "assets/images/time_white.png")
+                                                        : const AssetImage(
+                                                            "assets/images/time_black.png"),
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              const Gap(10),
+                                              CustomWidgets().normalTextbox(
+                                                  time.toLowerCase(),
+                                                  12,
+                                                  user['type'] == 'debit'
+                                                      ? const Color.fromARGB(
+                                                          255, 255, 255, 255)
+                                                      : const Color.fromARGB(
+                                                          255, 0, 0, 0)),
+                                            ],
                                           ),
-                                          const Gap(10),
-                                          CustomWidgets().normalTextbox(
-                                              '${time.toLowerCase()}',
-                                              14,
+                                          CustomWidgets().boldTextbox(
+                                              snapshot.data()['note'],
+                                              12,
                                               user['type'] == 'debit'
                                                   ? Color.fromARGB(
                                                       255, 255, 255, 255)
                                                   : Color.fromARGB(
                                                       255, 0, 0, 0)),
+                                          const Gap(2),
                                         ],
                                       ),
+                                      CustomWidgets().boldTextbox(
+                                          user['type'] == 'debit'
+                                              ? '-' + user['amount']
+                                              : '+' + user['amount'],
+                                          15,
+                                          user['type'] == 'debit'
+                                              ? Color.fromARGB(
+                                                  255, 255, 255, 255)
+                                              : Color.fromARGB(255, 0, 0, 0))
                                     ],
                                   ),
                                 ),
@@ -347,13 +369,80 @@ class _CalendarState extends State<Calendar> {
                 ),
               ),
             ),
+            SizedBox(
+              // height: 100,
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, left: 8),
+                      child: CustomWidgets().boldTextbox(
+                        monthString + ' : 2000',
+                        18,
+                        Color.fromARGB(255, 145, 255, 157),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, right: 8),
+                      child: CustomWidgets().boldTextbox(
+                        monthString + ' : 1000',
+                        18,
+                        const Color.fromARGB(255, 255, 138, 138),
+                      ),
+                    ),
+                  ],
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.only(top: 8.0, left: 8),
+                //       child: CustomWidgets().boldTextbox(
+                //         'LM credit : ',
+                //         18,
+                //         Color.fromARGB(255, 145, 255, 157),
+                //       ),
+                //     ),
+                //     Padding(
+                //       padding: const EdgeInsets.only(top: 8.0, right: 8),
+                //       child: CustomWidgets().boldTextbox(
+                //         'LM debit : ',
+                //         18,
+                //         const Color.fromARGB(255, 255, 138, 138),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, left: 8),
+                      child: CustomWidgets().boldTextbox(
+                        'LM Bal : 500',
+                        18,
+                        Color.fromARGB(255, 145, 255, 157),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, right: 8),
+                      child: CustomWidgets().boldTextbox(
+                        'Total Bal: 1500',
+                        18,
+                        Color.fromARGB(255, 145, 255, 157),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            )
           ],
         ),
       ),
     );
   }
 
-  // ... Your existing code ...
   String getWeekdayString(int weekday) {
     switch (weekday) {
       case 1:
